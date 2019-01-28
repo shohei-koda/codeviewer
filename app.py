@@ -1,5 +1,8 @@
+# coding: utf-8
 
-from flask import Flask
+
+import os
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -9,8 +12,11 @@ def index():
 
 @app.route('/pycheck')
 def pycheker():
-    return 'pycheck';
+    if request.method == 'POST':
+        return request.get_json
 
+    return 'pycheck hello!'
 
 if __name__ == '__main__':
-    app.run()
+    port = int(os.environ.get('FLASK_PORT', 5000))
+    app.run(port=port)
