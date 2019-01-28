@@ -2,6 +2,7 @@
 
 
 import os
+import pprint
 from flask import Flask, render_template, request, json
 
 app = Flask(__name__)
@@ -16,7 +17,7 @@ def pycheker():
         data = json.dumps(request.json)
         arrData = json.loads(data)
 
-        print(arrData[0]['head']['repo'])
+        pprint.pprint(arrData)
             
         return 'git webhooks'
 
