@@ -14,7 +14,12 @@ def index():
 def pycheker():
     if request.headers['Content-Type'] == 'application/json':
         data = json.dumps(request.json)
-        print(data['head']['repo']['clone_url'])
+
+        for k, v in data.items():
+            print(k)
+            print(v)
+            
+        print(data)
         return data
 
     return 'pycheck hello!'
