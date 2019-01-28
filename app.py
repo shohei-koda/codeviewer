@@ -16,7 +16,10 @@ def pycheker():
         data = json.dumps(request.json)
         arrData = json.loads(data)
 
-        print(arrData)
+        for k, v in arrData:
+            print(k)
+            print(v)
+            
         return 'git webhooks'
 
     return 'pycheck hello!'
