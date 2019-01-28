@@ -10,10 +10,10 @@ app = Flask(__name__)
 def index():
     return 'テスト'
 
-@app.route('/pycheck')
+@app.route('/pycheck', methods=('GET', 'POST'))
 def pycheker():
     if request.method == 'POST':
-        return request.get_json
+        return request.get_json()
 
     return 'pycheck hello!'
 
