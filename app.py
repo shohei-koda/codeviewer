@@ -3,6 +3,7 @@
 
 import os
 import pprint
+import subprocess
 from flask import Flask, render_template, request, json
 
 app = Flask(__name__)
@@ -17,9 +18,13 @@ def pycheker():
         data = json.dumps(request.json)
         arrData = json.loads(data)
 
-        pprint.pprint(arrData['repository']['clone_url'])
+        #pprint.pprint(arrData['repository']['clone_url'])
+        clone_url = arrData['repository']['clone_url']
+        cmd = f'git clone {clone_url} test_code'
+
+        subprocess.call(cmd)
             
-        return 'git webhooks'
+        return 'git cloned'
 
     return 'pycheck hello!'
 
