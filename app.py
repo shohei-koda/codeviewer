@@ -14,7 +14,7 @@ def index():
 def pycheker():
     if request.headers['Content-Type'] == 'application/json':
         data = json.dumps(request.json)
-        arrData = json.load(data)
+        arrData = json.loads(data)
 
         print(arrData)
         return arrData
