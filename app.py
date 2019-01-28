@@ -15,14 +15,30 @@ def index():
 @app.route('/pycheck', methods=['POST'])
 def pycheker():
     if request.headers['Content-Type'] == 'application/json':
+        code_dir = '/tmp/test_code'
+
+
         data = json.dumps(request.json)
         arrData = json.loads(data)
 
         #pprint.pprint(arrData['repository']['clone_url'])
         clone_url = arrData['repository']['clone_url']
-        cmd = f'git clone {clone_url} /tmp/test_code'
+        cmd = f'git clone {clone_url} {code_dir}'
 
-        subprocess.Popen(cmd, shell=True)
+        """
+        proc = subprocess.Popen(cmd, shell=True)
+
+        try:
+            outs,err = proc.communicate(timeout=15)
+        except TimeoutExpired:
+            proc.kill()
+        """
+        subprocess.run(['git', 'clone', clone_url, code_dir])
+
+        subprocess.run(['flake8', code_dir])
+        #cmd = f'flake8 {code_dir}'
+        
+
             
         return 'git cloned'
 
