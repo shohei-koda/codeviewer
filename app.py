@@ -22,7 +22,7 @@ def pycheker():
         clone_url = arrData['repository']['clone_url']
         cmd = f'git clone {clone_url} /tmp/test_code'
 
-        subprocess.call(cmd)
+        subprocess.Popen(cmd, shell=True)
             
         return 'git cloned'
 
