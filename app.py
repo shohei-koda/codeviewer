@@ -2,6 +2,7 @@
 
 
 import os
+import json
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
@@ -10,10 +11,11 @@ app = Flask(__name__)
 def index():
     return 'テスト'
 
-@app.route('/pycheck', methods=('GET', 'POST'))
+@app.route('/pycheck', methods=['GET', 'POST'])
 def pycheker():
     if request.method == 'POST':
-        return request.get_json()
+        data = json.loads(request.data)
+        return 'get json'
 
     return 'pycheck hello!'
 
