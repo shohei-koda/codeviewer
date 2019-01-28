@@ -33,9 +33,13 @@ def pycheker():
         except TimeoutExpired:
             proc.kill()
         """
-        subprocess.run(['git', 'clone', clone_url, code_dir], stdout=subprocess.PIPE)
+        proc = subprocess.run(['git', 'clone', clone_url, code_dir], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        print(proc.stdout.decode('utf8'))
+        print(proc.stderr.decode('utf8'))
 
-        subprocess.run(['flake8', code_dir], stdout=subprocess.PIPE)
+        proc = subprocess.run(['flake8', code_dir], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        print(proc.stdout.decode('utf8'))
+        print(proc.stderr.decode('utf8'))
 
             
         return 'git cloned'
