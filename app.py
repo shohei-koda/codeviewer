@@ -15,10 +15,6 @@ def pycheker():
     if request.headers['Content-Type'] == 'application/json':
         data = json.load(request.json)
 
-        for k, v in data.items():
-            print(k)
-            print(v)
-
         print(data)
         return data
 
