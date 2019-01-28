@@ -34,10 +34,12 @@ def pycheker():
             proc.kill()
         """
         proc = subprocess.run(['git', 'clone', clone_url, code_dir], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        print('git cloned')
         print(proc.stdout.decode('utf8'))
         print(proc.stderr.decode('utf8'))
 
         proc = subprocess.run(['flake8', code_dir], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        print('exec flake8')
         print(proc.stdout.decode('utf8'))
         print(proc.stderr.decode('utf8'))
 
