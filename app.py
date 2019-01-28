@@ -17,7 +17,7 @@ def pycheker():
         data = json.dumps(request.json)
         arrData = json.loads(data)
 
-        pprint.pprint(arrData['repository']
+        pprint.pprint(arrData['repository'])
             
         return 'git webhooks'
 
