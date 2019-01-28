@@ -18,7 +18,7 @@ def pycheker():
 
         for k, v in arrData:
             print(k)
-            print(v)
+            print(v['head'])
             
         return 'git webhooks'
 
