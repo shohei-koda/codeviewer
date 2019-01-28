@@ -20,7 +20,7 @@ def pycheker():
 
         #pprint.pprint(arrData['repository']['clone_url'])
         clone_url = arrData['repository']['clone_url']
-        cmd = f'git clone {clone_url} test_code'
+        cmd = f'git clone {clone_url} /tmp/test_code'
 
         subprocess.call(cmd)
             
