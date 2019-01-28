@@ -22,6 +22,7 @@ def pycheker():
         arrData = json.loads(data)
 
         #pprint.pprint(arrData['repository']['clone_url'])
+        pprint.pprint(arrData.keys())
         clone_url = arrData['repository']['clone_url']
         cmd = f'git clone {clone_url} {code_dir}'
 
