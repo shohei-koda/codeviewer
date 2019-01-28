@@ -14,6 +14,7 @@ def index():
 def pycheker():
     if request.headers['Content-Type'] == 'application/json':
         data = json.dumps(request.json)
+        print(data['head']['repo']['clone_url'])
         return data
 
     return 'pycheck hello!'
