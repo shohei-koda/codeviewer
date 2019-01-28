@@ -13,10 +13,11 @@ def index():
 @app.route('/pycheck', methods=['POST'])
 def pycheker():
     if request.headers['Content-Type'] == 'application/json':
-        data = json.load(request.json)
+        data = json.dumps(request.json)
+        arrData = json.load(data)
 
-        print(data)
-        return data
+        print(arrData)
+        return arrData
 
     return 'pycheck hello!'
 
