@@ -5,3 +5,4 @@ gunicorn==19.9.0
 Jinja2==2.10
 requests==2.20.1
 Werkzeug==0.14.1
+pep8==1.7.1
