@@ -20,7 +20,7 @@ def pycheker():
     # コンテンツタイプで判断
     if request.headers['Content-Type'] == 'application/json':
         # git clone先
-        code_dir = '/app'
+        code_dir = 'app.py'
 
         # リクエストデータのjsonを辞書型に変換
         data = json.dumps(request.json)
