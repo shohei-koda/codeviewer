@@ -33,6 +33,7 @@ def pycheker():
         clone_url = arrData['repository']['clone_url']
         # リクエストデータからレビューコメント追加URLを取得
         review_url = arrData['pull_request']['url']
+        review_url = f'{review_url}/reviews/1/events'
 
 
         """
@@ -59,7 +60,9 @@ def pycheker():
         print(proc.stderr.decode('utf8'))
 
         postData = {'body': 'comment review. @todo transiton to check runs event', 'event': 'COMMENT'}
-        ret = requests.post(f'{review_url}/reviews/1/events', data=postData)
+        ret = requests.post(review_url, data=postData)
+
+        print(review_url)
 
         print(ret)
 
