@@ -20,7 +20,8 @@ def pycheker():
     # コンテンツタイプで判断
     if request.headers['Content-Type'] == 'application/json':
         # git clone先
-        code_dir = 'app.py'
+        code_dir = '/tmp/test_code'
+        test_dir = 'app.py'
 
         # リクエストデータのjsonを辞書型に変換
         data = json.dumps(request.json)
@@ -54,7 +55,7 @@ def pycheker():
         print(proc.stdout.decode('utf8'))
         print(proc.stderr.decode('utf8'))
 
-        proc = subprocess.run(['flake8', code_dir], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        proc = subprocess.run(['flake8', test_dir], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         print('exec flake8')
         print(proc.stdout.decode('utf8'))
         print(proc.stderr.decode('utf8'))
