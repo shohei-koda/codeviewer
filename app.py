@@ -1,32 +1,44 @@
 # coding: utf-8
 
-
 import os
 import pprint
 import subprocess
+import requests
+
 from flask import Flask, render_template, request, json
+
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
-    return 'テスト'
+    return 'テストへようこそ！'
 
 @app.route('/pycheck', methods=['POST'])
 def pycheker():
+    # コンテンツタイプで判断
     if request.headers['Content-Type'] == 'application/json':
+        # git clone先
         code_dir = '/tmp/test_code'
 
-
+        # リクエストデータのjsonを辞書型に変換
         data = json.dumps(request.json)
         arrData = json.loads(data)
 
         #pprint.pprint(arrData['repository']['clone_url'])
         pprint.pprint(arrData.keys())
+
+        # リクエストデータからクローンURLを取得
         clone_url = arrData['repository']['clone_url']
-        cmd = f'git clone {clone_url} {code_dir}'
+        # リクエストデータからレビューコメント追加URLを取得
+        review_url = arrData['pull_request']['url']
+
 
         """
+        コマンド実行方法　別解
+
+        cmd = f'git clone {clone_url} {code_dir}'
         proc = subprocess.Popen(cmd, shell=True)
 
         try:
@@ -34,6 +46,8 @@ def pycheker():
         except TimeoutExpired:
             proc.kill()
         """
+
+        """ コマンド実行 git clone & flake8 """
         proc = subprocess.run(['git', 'clone', clone_url, code_dir], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         print('git cloned')
         print(proc.stdout.decode('utf8'))
@@ -43,6 +57,11 @@ def pycheker():
         print('exec flake8')
         print(proc.stdout.decode('utf8'))
         print(proc.stderr.decode('utf8'))
+
+        postData = {'body': 'comment review. @todo transiton to check runs event', 'events': 'COMMENT'}
+        ret = requests.post(f'{review_url}/1/events', data=postData)
+
+        print(ret)
 
             
         return 'git cloned'
