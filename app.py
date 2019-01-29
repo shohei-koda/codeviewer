@@ -58,8 +58,8 @@ def pycheker():
         print(proc.stdout.decode('utf8'))
         print(proc.stderr.decode('utf8'))
 
-        postData = {'body': 'comment review. @todo transiton to check runs event', 'events': 'COMMENT'}
-        ret = requests.post(f'{review_url}/1/events', data=postData)
+        postData = {'body': 'comment review. @todo transiton to check runs event', 'event': 'COMMENT'}
+        ret = requests.post(f'{review_url}/reviews/1/events', data=postData)
 
         print(ret)
 
